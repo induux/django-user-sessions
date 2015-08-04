@@ -74,7 +74,7 @@ class SessionStore(SessionBase):
             expire_date=self.get_expiry_date(),
             user_agent=self.user_agent,
             user_id=self.user_id,
-            ip=self.ip.split(',')[0],
+            ip=self.ip,
         )
         using = router.db_for_write(Session, instance=obj)
         try:
