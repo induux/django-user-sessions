@@ -20,6 +20,11 @@ class SessionMiddleware(object):
             if not x_fallback:
                 raise AttributeError('No IP for REMOTE_ADDR and no fallback set')
             ip = request.META.get(x_fallback, None)
+
+        if ip:
+            # strip more than one ip
+            ip = ip.split(',')[0]
+
         request.session = engine.SessionStore(
             ip=ip,
             user_agent=request.META.get('HTTP_USER_AGENT', ''),
